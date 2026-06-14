@@ -37,9 +37,10 @@
     <div id="main-navbar" class="navbar-menu">
       <div class="navbar-end">
         <a class="navbar-item" href="#abstract">Abstract</a>
+        <a class="navbar-item" href="#overview-video">Video</a>
         <a class="navbar-item" href="#method">Method</a>
         <a class="navbar-item" href="#results">Results</a>
-        <a class="navbar-item" href="#videos">Videos</a>
+        <a class="navbar-item" href="#real-videos">Rollouts</a>
         <a class="navbar-item" href="#bibtex">BibTeX</a>
       </div>
     </div>
@@ -129,6 +130,26 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section overview-video-section" id="overview-video">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Video Overview</h2>
+      <div class="content publication-body video-intro">
+        <p>
+          A 3-minute walkthrough of APEX, covering the test-time execution gap, the adaptive execution layer, and the main experimental findings across simulation, VLA policies, and real-robot deployment.
+        </p>
+      </div>
+      <article class="video-feature">
+        <video controls preload="metadata" playsinline>
+          <source src="./static/videos/apex/main-explainer.mp4" type="video/mp4">
+        </video>
+        <div class="video-copy">
+          <h3>APEX Method and Experiments</h3>
+          <p>Full project overview narrated by the authors.</p>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -252,9 +273,9 @@
     </div>
   </section>
 
-  <section class="section video-section" id="videos">
+  <section class="section video-section" id="real-videos">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">DP + APEX Real-Robot Videos</h2>
+      <h2 class="title is-3 has-text-centered">Real-Robot DP + APEX Videos</h2>
       <div class="content publication-body video-intro">
         <p>
           All rollouts are shown at 4x speed. The first video compares raw Diffusion Policy execution against DP + APEX, while the remaining videos show the real-robot PushCube, PickCube, and PegInsert tasks evaluated with DP + APEX.
@@ -297,6 +318,91 @@
     </div>
   </section>
 
+  <section class="section simulation-section" id="maniskill-videos">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">ManiSkill Simulation Rollouts</h2>
+      <div class="content publication-body video-intro">
+        <p>
+          Task-level comparisons show a representative baseline failure next to a successful APEX-corrected rollout. These clips illustrate how execution-side correction turns useful policy intent into more accurate realized motion.
+        </p>
+      </div>
+
+      <div class="sim-task-list">
+        <article class="sim-task">
+          <h3>PushCube</h3>
+          <div class="comparison-video-grid">
+            <div class="video-card compact-video-card">
+              <video controls preload="metadata" playsinline muted loop>
+                <source src="./static/videos/apex/maniskill-pushcube-failure.mp4" type="video/mp4">
+              </video>
+              <h4>Baseline failure</h4>
+            </div>
+            <div class="video-card compact-video-card success-video">
+              <video controls preload="metadata" playsinline muted loop>
+                <source src="./static/videos/apex/maniskill-pushcube-success.mp4" type="video/mp4">
+              </video>
+              <h4>APEX success</h4>
+            </div>
+          </div>
+        </article>
+
+        <article class="sim-task">
+          <h3>PickCube</h3>
+          <div class="comparison-video-grid">
+            <div class="video-card compact-video-card">
+              <video controls preload="metadata" playsinline muted loop>
+                <source src="./static/videos/apex/maniskill-pickcube-failure.mp4" type="video/mp4">
+              </video>
+              <h4>Baseline failure</h4>
+            </div>
+            <div class="video-card compact-video-card success-video">
+              <video controls preload="metadata" playsinline muted loop>
+                <source src="./static/videos/apex/maniskill-pickcube-success.mp4" type="video/mp4">
+              </video>
+              <h4>APEX success</h4>
+            </div>
+          </div>
+        </article>
+
+        <article class="sim-task">
+          <h3>PlaceSphere</h3>
+          <div class="comparison-video-grid">
+            <div class="video-card compact-video-card">
+              <video controls preload="metadata" playsinline muted loop>
+                <source src="./static/videos/apex/maniskill-placesphere-failure.mp4" type="video/mp4">
+              </video>
+              <h4>Baseline failure</h4>
+            </div>
+            <div class="video-card compact-video-card success-video">
+              <video controls preload="metadata" playsinline muted loop>
+                <source src="./static/videos/apex/maniskill-placesphere-success.mp4" type="video/mp4">
+              </video>
+              <h4>APEX success</h4>
+            </div>
+          </div>
+        </article>
+
+        <article class="sim-task">
+          <h3>PegInsertion</h3>
+          <div class="comparison-video-grid">
+            <div class="video-card compact-video-card">
+              <video controls preload="metadata" playsinline muted loop>
+                <source src="./static/videos/apex/maniskill-peginsertion-failure.mp4" type="video/mp4">
+              </video>
+              <h4>Baseline failure</h4>
+            </div>
+            <div class="video-card compact-video-card success-video">
+              <video controls preload="metadata" playsinline muted loop>
+                <source src="./static/videos/apex/maniskill-peginsertion-success.mp4" type="video/mp4">
+              </video>
+              <h4>APEX success</h4>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-variable is-6">
@@ -323,6 +429,13 @@
             <img src="./static/images/apex/pi05_libero.png"
                  alt="LIBERO Spatial results for pi0.5 showing success-rate and tracking-error gains.">
           </figure>
+          <article class="video-card libero-video-card">
+            <video controls preload="metadata" playsinline muted loop>
+              <source src="./static/videos/apex/vla-libero-bowl-between.mp4" type="video/mp4">
+            </video>
+            <h3>LIBERO Spatial VLA rollout</h3>
+            <p>Representative &pi;<sub>0.5</sub> task: place the bowl between the plate and ramekin.</p>
+          </article>
         </div>
       </div>
     </div>
