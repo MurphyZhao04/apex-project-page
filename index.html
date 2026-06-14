@@ -36,6 +36,7 @@
     </div>
     <div id="main-navbar" class="navbar-menu">
       <div class="navbar-end">
+        <a class="navbar-item" href="#gap">Gap</a>
         <a class="navbar-item" href="#abstract">Abstract</a>
         <a class="navbar-item" href="#method">Method</a>
         <a class="navbar-item" href="#results">Results</a>
@@ -111,6 +112,22 @@
     </div>
   </section>
 
+  <section class="section gap-section" id="gap">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Test-Time Execution Gap</h2>
+      <div class="content publication-body video-intro">
+        <p>
+          Learned policies output high-level action references, but the robot executes them through a low-level controller. At test time, missing higher-order references and unknown controller dynamics can make the realized motion deviate from the commanded motion, which is especially harmful for precision-sensitive manipulation.
+        </p>
+      </div>
+      <article class="video-feature">
+        <video controls preload="metadata" playsinline muted loop>
+          <source src="./static/videos/apex/test-gap.mp4" type="video/mp4">
+        </video>
+      </article>
+    </div>
+  </section>
+
   <section class="section" id="abstract">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
@@ -118,13 +135,7 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified publication-body">
             <p>
-              Modern imitation and VLA policies output high-level action references that are later executed by low-level controllers. At deployment, missing higher-order references and unknown controller dynamics can make the realized motion systematically deviate from the policy command. We call this discrepancy the <em>test-time execution gap</em>.
-            </p>
-            <p>
-              <strong>APEX</strong> is a plug-and-play execution layer inserted between the policy and controller. It reconstructs a dynamically feasible reference from policy outputs, then adapts the correction online using low-level state feedback, while leaving both the policy and controller untouched.
-            </p>
-            <p>
-              Experiments from demonstration replay to learned-policy deployment show that APEX reduces tracking error and improves manipulation success across visuomotor policies, VLA policies, simulation, and real UR5 tasks.
+              Modern imitation learning methods, including visuomotor and Vision-Language-Action (VLA) policies, typically output high-level action references that are executed by low-level controllers. However, the absence of higher-order reference signals, together with the policy's lack of awareness of the underlying low-level control dynamics during training, inevitably induces an execution gap. As a result, realized actions deviate systematically from policy-commanded ones, with a critical impact on precision-sensitive manipulation. Prior work either modifies the policy architecture or the low-level controller, both requiring intrusive changes to the pretrained policy or packaged controller. This raises a natural question: when the policy and controller are both treated as inaccessible black boxes, can we bridge the execution gap? We propose <strong>A</strong>daptive <strong>P</strong>olicy <strong>EX</strong>ecution (<strong>APEX</strong>), a plug-and-play framework inserted between the policy and the controller that reconstructs a dynamically feasible reference from policy outputs and adapts at test-time according to low-level state feedback, with a provable convergence guarantee. Extensive empirical studies show that APEX reduces controller-induced tracking error by 41.2% on demonstration replay and improves manipulation success by 4.8--25.8 percentage points across four visuomotor and VLA policy classes.
             </p>
           </div>
         </div>
