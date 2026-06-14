@@ -36,8 +36,8 @@
     </div>
     <div id="main-navbar" class="navbar-menu">
       <div class="navbar-end">
-        <a class="navbar-item" href="#gap">Gap</a>
         <a class="navbar-item" href="#abstract">Abstract</a>
+        <a class="navbar-item" href="#gap">Gap</a>
         <a class="navbar-item" href="#method">Method</a>
         <a class="navbar-item" href="#results">Results</a>
         <a class="navbar-item" href="#real-videos">Rollouts</a>
@@ -112,6 +112,21 @@
     </div>
   </section>
 
+  <section class="section" id="abstract">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified publication-body">
+            <p>
+              Modern imitation learning methods, including visuomotor and Vision-Language-Action (VLA) policies, typically output high-level action references that are executed by low-level controllers. However, the absence of higher-order reference signals, together with the policy's lack of awareness of the underlying low-level control dynamics during training, inevitably induces an execution gap. As a result, realized actions deviate systematically from policy-commanded ones, with a critical impact on precision-sensitive manipulation. Prior work either modifies the policy architecture or the low-level controller, both requiring intrusive changes to the pretrained policy or packaged controller. This raises a natural question: when the policy and controller are both treated as inaccessible black boxes, can we bridge the execution gap? We propose <strong>A</strong>daptive <strong>P</strong>olicy <strong>EX</strong>ecution (<strong>APEX</strong>), a plug-and-play framework inserted between the policy and the controller that reconstructs a dynamically feasible reference from policy outputs and adapts at test-time according to low-level state feedback, with a provable convergence guarantee. Extensive empirical studies show that APEX reduces controller-induced tracking error by 41.2% on demonstration replay and improves manipulation success by 4.8--25.8 percentage points across four visuomotor and VLA policy classes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section gap-section" id="gap">
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Test-Time Execution Gap</h2>
@@ -125,21 +140,6 @@
           <source src="./static/videos/apex/test-gap.mp4" type="video/mp4">
         </video>
       </article>
-    </div>
-  </section>
-
-  <section class="section" id="abstract">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified publication-body">
-            <p>
-              Modern imitation learning methods, including visuomotor and Vision-Language-Action (VLA) policies, typically output high-level action references that are executed by low-level controllers. However, the absence of higher-order reference signals, together with the policy's lack of awareness of the underlying low-level control dynamics during training, inevitably induces an execution gap. As a result, realized actions deviate systematically from policy-commanded ones, with a critical impact on precision-sensitive manipulation. Prior work either modifies the policy architecture or the low-level controller, both requiring intrusive changes to the pretrained policy or packaged controller. This raises a natural question: when the policy and controller are both treated as inaccessible black boxes, can we bridge the execution gap? We propose <strong>A</strong>daptive <strong>P</strong>olicy <strong>EX</strong>ecution (<strong>APEX</strong>), a plug-and-play framework inserted between the policy and the controller that reconstructs a dynamically feasible reference from policy outputs and adapts at test-time according to low-level state feedback, with a provable convergence guarantee. Extensive empirical studies show that APEX reduces controller-induced tracking error by 41.2% on demonstration replay and improves manipulation success by 4.8--25.8 percentage points across four visuomotor and VLA policy classes.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
