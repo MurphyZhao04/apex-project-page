@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="APEX is a plug-and-play adaptive execution layer that bridges the execution gap between learned imitation policies and inaccessible low-level robot controllers.">
+  <meta name="keywords" content="APEX, imitation learning, robotics, test-time adaptation, precise manipulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>APEX: Adaptive Policy Execution for Precise Manipulation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar site-navbar" role="navigation" aria-label="main navigation">
+  <div class="container is-max-desktop">
+    <div class="navbar-brand">
+      <a class="navbar-item brand-mark" href="#top" aria-label="APEX home">
+        APEX
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="main-navbar">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="main-navbar" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#abstract">Abstract</a>
+        <a class="navbar-item" href="#method">Method</a>
+        <a class="navbar-item" href="#results">Results</a>
+        <a class="navbar-item" href="#bibtex">BibTeX</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero publication-header">
+    <div class="hero-body">
+      <div class="container is-max-desktop has-text-centered">
+        <p class="publication-venue">Preprint</p>
+        <h1 class="title is-1 publication-title">
+          APEX: Adaptive Policy Execution for Precise Manipulation
+        </h1>
+
+        <div class="is-size-5 publication-authors">
+          <span class="author-block">Mengfei Zhao<sup>1,*</sup></span>
+          <span class="author-block">Chenxi Jiang<sup>1,*</sup></span>
+          <span class="author-block">Tuo An<sup>1</sup></span>
+          <span class="author-block">Jindou Jia<sup>1,&dagger;</sup></span>
+          <span class="author-block">Jianfei Yang<sup>1,&dagger;</sup></span>
+        </div>
+
+        <div class="is-size-5 publication-authors affiliation-line">
+          <span class="author-block"><sup>1</sup>MARS Lab, Nanyang Technological University</span>
+        </div>
+
+        <div class="contribution-note">
+          <span><sup>*</sup>Equal contribution</span>
+          <span><sup>&dagger;</sup>Corresponding authors</span>
+        </div>
+
+        <div class="publication-links">
+          <span class="link-block">
+            <a href="./static/pdfs/apex-paper.pdf"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="fas fa-file-pdf"></i>
+              </span>
+              <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="#bibtex"
+               class="button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="fas fa-quote-right"></i>
+              </span>
+              <span>BibTeX</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <figure class="publication-figure">
+          <img src="./static/images/apex/teaser.png"
+               alt="Overview of APEX as an online correction layer between a learned policy and a low-level controller.">
+        </figure>
+        <h2 class="subtitle has-text-centered teaser-subtitle">
+          APEX inserts an online adaptive correction layer between frozen learned policies and black-box low-level controllers.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="abstract">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified publication-body">
+            <p>
+              Modern imitation learning methods, including visuomotor and Vision-Language-Action (VLA) policies, typically output high-level action references that are executed by low-level controllers. However, the absence of higher-order reference signals, together with the policy's lack of awareness of the underlying low-level control dynamics during training, inevitably induces an execution gap. As a result, realized actions deviate systematically from policy-commanded ones, with a critical impact on precision-sensitive manipulation.
+            </p>
+            <p>
+              Prior work either modifies the policy architecture or the low-level controller, both requiring intrusive changes to the pretrained policy or packaged controller. This raises a natural question: when the policy and controller are both treated as inaccessible black boxes, can we bridge the execution gap? We propose <strong>Adaptive Policy Execution (APEX)</strong>, a plug-and-play framework inserted between the policy and the controller that reconstructs a dynamically feasible reference from policy outputs and adapts at test-time according to low-level state feedback, with a provable convergence guarantee.
+            </p>
+            <p>
+              Extensive empirical studies show that APEX reduces controller-induced tracking error by 41.2% on demonstration replay and improves manipulation success by 4.8-25.8 percentage points across four visuomotor and VLA policy classes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section method-section" id="method">
+    <div class="container is-max-desktop">
+      <div class="columns is-vcentered is-variable is-6">
+        <div class="column is-half">
+          <h2 class="title is-3">Method</h2>
+          <div class="content publication-body">
+            <p>
+              Learned policies often output position-like action references, while the robot's low-level controller may require velocity, acceleration, and system-dependent compensation to realize those references accurately. This mismatch creates a test-time execution gap even when the policy intent is useful.
+            </p>
+            <p>
+              APEX bridges the gap in two stages. First, an adaptive passive filter reconstructs a smooth, dynamically feasible reference and its higher-order signals from the policy output. Second, test-time adaptive terms use measured tracking error to compensate for unknown execution dynamics and controller parameters, without retraining the policy or modifying the packaged controller.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="method-points">
+            <div class="method-point">
+              <span class="method-index">1</span>
+              <div>
+                <h3>Policy and Controller Stay Frozen</h3>
+                <p>APEX is inserted at the policy-controller interface and treats both sides as black boxes.</p>
+              </div>
+            </div>
+            <div class="method-point">
+              <span class="method-index">2</span>
+              <div>
+                <h3>Reference Reconstruction</h3>
+                <p>A passive filter supplies smooth velocity- and acceleration-like signals missing from high-level policy outputs.</p>
+              </div>
+            </div>
+            <div class="method-point">
+              <span class="method-index">3</span>
+              <div>
+                <h3>Online Adaptation</h3>
+                <p>Adaptive coefficients are updated from real-time feedback, with a nominal convergence guarantee.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section results-section" id="results">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Key Results</h2>
+      <div class="columns is-variable is-4 result-grid">
+        <div class="column">
+          <div class="metric-card">
+            <div class="metric-value">41.2%</div>
+            <div class="metric-label">Tracking-error reduction on demonstration replay</div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="metric-card">
+            <div class="metric-value">+18.8 pp</div>
+            <div class="metric-label">Replay success gain, from 62.5% to 81.3%</div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="metric-card">
+            <div class="metric-value">4</div>
+            <div class="metric-label">Policy classes: ACT, FM, DP, and &pi;<sub>0.5</sub></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content publication-body result-copy">
+        <p>
+          APEX reduces execution-side tracking error both when replaying expert references and when executing frozen learned policies. The gains are most visible in precision-sensitive manipulation, such as PegInsertion, where small tracking errors can disrupt contact timing and alignment.
+        </p>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <figure class="publication-figure">
+            <img src="./static/images/apex/replay.png"
+                 alt="Expert replay benchmark showing APEX reduces tracking error and improves success rates across simulated tasks.">
+            <figcaption>
+              Expert-replay benchmark in simulation. APEX reduces tracking error across four tasks and improves success, including contact-rich PegInsertion.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <figure class="publication-figure">
+            <img src="./static/images/apex/act.png"
+                 alt="ACT policy deployment on PegInsertion showing tracking-error reduction and success-rate gains across controller settings.">
+            <figcaption>
+              Deployment with ACT on PegInsertion. APEX keeps realized actions closer to the policy reference and improves success across a grid of controller gains.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section real-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-vcentered is-variable is-6">
+        <div class="column">
+          <h2 class="title is-3">Real-Robot Deployment</h2>
+          <div class="content publication-body">
+            <p>
+              On a physical UR5, APEX reduces tracking error across Push, Pick, and Insert tasks under the robot's native position servo. The largest task-level gain appears on PegInsertion, where APEX raises the flow matching policy's success rate from 20% to 35%.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <figure class="publication-figure compact-figure">
+            <img src="./static/images/apex/real_robot.png"
+                 alt="UR5 real-world deployment sequences and tracking-error comparison for Push, Pick, and Insert tasks.">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-variable is-6">
+        <div class="column">
+          <h2 class="title is-3">Adaptive Update</h2>
+          <div class="content publication-body">
+            <p>
+              APEX is not just a fixed command offset. In ablations, the adaptive variant outperforms the best fixed-parameter correction and adjusts more strongly when tracking is degraded.
+            </p>
+          </div>
+          <figure class="publication-figure compact-figure">
+            <img src="./static/images/apex/ablation.png"
+                 alt="Adaptive-update ablation comparing convergence behavior and success rates.">
+          </figure>
+        </div>
+        <div class="column">
+          <h2 class="title is-3">VLA Generalization</h2>
+          <div class="content publication-body">
+            <p>
+              APEX also applies beyond joint-position policies. With &pi;<sub>0.5</sub> on LIBERO Spatial, APEX reduces mean end-effector tracking error from 8.0 mm to 4.9 mm and improves mean success from 72.1% to 97.9%.
+            </p>
+          </div>
+          <figure class="publication-figure compact-figure">
+            <img src="./static/images/apex/pi05_libero.png"
+                 alt="LIBERO Spatial results for pi0.5 showing success-rate and tracking-error gains.">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bibtex">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{zhao2026apex,
+  title   = {APEX: Adaptive Policy Execution for Precise Manipulation},
+  author  = {Zhao, Mengfei and Jiang, Chenxi and An, Tuo and Jia, Jindou and Yang, Jianfei},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</code></pre>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="./static/pdfs/apex-paper.pdf" aria-label="Paper PDF">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="#bibtex" aria-label="BibTeX">
+        <i class="fas fa-quote-right"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered footer-note">
+          <p>
+            Website template adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var burgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    burgers.forEach(function (burger) {
+      burger.addEventListener('click', function () {
+        var target = document.getElementById(burger.dataset.target);
+        burger.classList.toggle('is-active');
+        if (target) {
+          target.classList.toggle('is-active');
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
