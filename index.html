@@ -105,7 +105,7 @@
                alt="Overview of APEX as an online correction layer between a learned policy and a low-level controller.">
         </figure>
         <h2 class="subtitle has-text-centered teaser-subtitle">
-          APEX inserts an online adaptive correction layer between frozen learned policies and black-box low-level controllers.
+          APEX bridges the test-time execution gap between learned policies and black-box low-level controllers.
         </h2>
       </div>
     </div>
@@ -118,13 +118,13 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified publication-body">
             <p>
-              Modern imitation learning methods, including visuomotor and Vision-Language-Action (VLA) policies, typically output high-level action references that are executed by low-level controllers. However, the absence of higher-order reference signals, together with the policy's lack of awareness of the underlying low-level control dynamics during training, inevitably induces an execution gap. As a result, realized actions deviate systematically from policy-commanded ones, with a critical impact on precision-sensitive manipulation.
+              Modern imitation and VLA policies output high-level action references that are later executed by low-level controllers. At deployment, missing higher-order references and unknown controller dynamics can make the realized motion systematically deviate from the policy command. We call this discrepancy the <em>test-time execution gap</em>.
             </p>
             <p>
-              Prior work either modifies the policy architecture or the low-level controller, both requiring intrusive changes to the pretrained policy or packaged controller. This raises a natural question: when the policy and controller are both treated as inaccessible black boxes, can we bridge the execution gap? We propose <strong>Adaptive Policy Execution (APEX)</strong>, a plug-and-play framework inserted between the policy and the controller that reconstructs a dynamically feasible reference from policy outputs and adapts at test-time according to low-level state feedback, with a provable convergence guarantee.
+              <strong>APEX</strong> is a plug-and-play execution layer inserted between the policy and controller. It reconstructs a dynamically feasible reference from policy outputs, then adapts the correction online using low-level state feedback, while leaving both the policy and controller untouched.
             </p>
             <p>
-              Extensive empirical studies show that APEX reduces controller-induced tracking error by 41.2% on demonstration replay and improves manipulation success by 4.8-25.8 percentage points across four visuomotor and VLA policy classes.
+              Experiments from demonstration replay to learned-policy deployment show that APEX reduces tracking error and improves manipulation success across visuomotor policies, VLA policies, simulation, and real UR5 tasks.
             </p>
           </div>
         </div>
@@ -139,10 +139,10 @@
           <h2 class="title is-3">Method</h2>
           <div class="content publication-body">
             <p>
-              Learned policies often output position-like action references, while the robot's low-level controller may require velocity, acceleration, and system-dependent compensation to realize those references accurately. This mismatch creates a test-time execution gap even when the policy intent is useful.
+              APEX has two components. First, an adaptive passive filter turns policy outputs into a smooth, dynamically feasible reference with velocity- and acceleration-like signals.
             </p>
             <p>
-              APEX bridges the gap in two stages. First, an adaptive passive filter reconstructs a smooth, dynamically feasible reference and its higher-order signals from the policy output. Second, test-time adaptive terms use measured tracking error to compensate for unknown execution dynamics and controller parameters, without retraining the policy or modifying the packaged controller.
+              Second, feedback-driven adaptive terms refine this reference during execution to compensate for unknown dynamics and controller parameters.
             </p>
           </div>
         </div>
@@ -151,22 +151,22 @@
             <div class="method-point">
               <span class="method-index">1</span>
               <div>
-                <h3>Policy and Controller Stay Frozen</h3>
-                <p>APEX is inserted at the policy-controller interface and treats both sides as black boxes.</p>
+                <h3>Black-Box Interface</h3>
+                <p>No policy retraining or controller modification.</p>
               </div>
             </div>
             <div class="method-point">
               <span class="method-index">2</span>
               <div>
                 <h3>Reference Reconstruction</h3>
-                <p>A passive filter supplies smooth velocity- and acceleration-like signals missing from high-level policy outputs.</p>
+                <p>Recover smooth reference signals from policy outputs.</p>
               </div>
             </div>
             <div class="method-point">
               <span class="method-index">3</span>
               <div>
                 <h3>Online Adaptation</h3>
-                <p>Adaptive coefficients are updated from real-time feedback, with a nominal convergence guarantee.</p>
+                <p>Update correction terms from real-time feedback.</p>
               </div>
             </div>
           </div>
@@ -177,10 +177,10 @@
 
   <section class="section results-section" id="results">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Key Results</h2>
+      <h2 class="title is-3 has-text-centered">Experiments</h2>
       <div class="content publication-body result-copy">
         <p>
-          APEX reduces execution-side tracking error both when replaying expert references and when executing frozen learned policies. The gains are most visible in precision-sensitive manipulation, such as PegInsertion, where small tracking errors can disrupt contact timing and alignment.
+          We evaluate APEX by isolating controller-induced replay error, deploying frozen learned policies, and testing across policy classes and platforms.
         </p>
       </div>
 
@@ -190,7 +190,7 @@
             <img src="./static/images/apex/replay.png"
                  alt="Expert replay benchmark showing APEX reduces tracking error and improves success rates across simulated tasks.">
             <figcaption>
-              Expert-replay benchmark in simulation. APEX reduces tracking error across four tasks and improves success, including contact-rich PegInsertion.
+              Expert-replay benchmark: APEX reduces tracking error and improves success under controller mismatch.
             </figcaption>
           </figure>
         </div>
@@ -202,7 +202,7 @@
             <img src="./static/images/apex/act.png"
                  alt="ACT policy deployment on PegInsertion showing tracking-error reduction and success-rate gains across controller settings.">
             <figcaption>
-              Deployment with ACT on PegInsertion. APEX keeps realized actions closer to the policy reference and improves success across a grid of controller gains.
+              ACT deployment on PegInsertion across different controller gains.
             </figcaption>
           </figure>
         </div>
@@ -217,7 +217,7 @@
           <h2 class="title is-3">Real-Robot Deployment</h2>
           <div class="content publication-body">
             <p>
-              On a physical UR5, APEX reduces tracking error across Push, Pick, and Insert tasks under the robot's native position servo. The largest task-level gain appears on PegInsertion, where APEX raises the flow matching policy's success rate from 20% to 35%. All rollouts below are shown at 4x speed; the first video compares raw Diffusion Policy execution against DP + APEX, followed by real-robot PushCube, PickCube, and PegInsert rollouts with DP + APEX.
+              On a physical UR5, APEX improves execution under the robot's native position servo. The largest gain appears on PegInsertion, where the flow matching policy improves from 20% to 35%. Rollouts are shown at 4x speed.
             </p>
           </div>
         </div>
@@ -271,7 +271,7 @@
           <h2 class="title is-3">Adaptive Update</h2>
           <div class="content publication-body">
             <p>
-              APEX is not just a fixed command offset. In ablations, the adaptive variant outperforms the best fixed-parameter correction and adjusts more strongly when tracking is degraded.
+              The adaptive update outperforms the best fixed correction and increases correction strength when tracking degrades.
             </p>
           </div>
           <figure class="publication-figure compact-figure">
@@ -283,7 +283,7 @@
           <h2 class="title is-3">VLA Generalization</h2>
           <div class="content publication-body">
             <p>
-              APEX also applies beyond joint-position policies. With &pi;<sub>0.5</sub> on LIBERO Spatial, APEX reduces mean end-effector tracking error from 8.0 mm to 4.9 mm and improves mean success from 72.1% to 97.9%.
+              With &pi;<sub>0.5</sub> on LIBERO Spatial, APEX reduces end-effector tracking error and improves mean success from 72.1% to 97.9%.
             </p>
           </div>
           <figure class="publication-figure compact-figure">
