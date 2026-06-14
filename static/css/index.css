@@ -196,13 +196,18 @@ a:hover {
   background: #eef4f8;
 }
 
-.video-section {
-  background: #fbfcfb;
-}
-
 .video-intro {
   max-width: 840px;
   margin: 0 auto 1.5rem;
+}
+
+.real-video-block {
+  margin-top: 2rem;
+}
+
+.real-video-block > .title {
+  margin-bottom: 1rem;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .video-feature {

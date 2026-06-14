@@ -210,14 +210,14 @@
     </div>
   </section>
 
-  <section class="section real-section">
+  <section class="section real-section" id="real-videos">
     <div class="container is-max-desktop">
       <div class="columns is-vcentered is-variable is-6">
         <div class="column">
           <h2 class="title is-3">Real-Robot Deployment</h2>
           <div class="content publication-body">
             <p>
-              On a physical UR5, APEX reduces tracking error across Push, Pick, and Insert tasks under the robot's native position servo. The largest task-level gain appears on PegInsertion, where APEX raises the flow matching policy's success rate from 20% to 35%.
+              On a physical UR5, APEX reduces tracking error across Push, Pick, and Insert tasks under the robot's native position servo. The largest task-level gain appears on PegInsertion, where APEX raises the flow matching policy's success rate from 20% to 35%. All rollouts below are shown at 4x speed; the first video compares raw Diffusion Policy execution against DP + APEX, followed by real-robot PushCube, PickCube, and PegInsert rollouts with DP + APEX.
             </p>
           </div>
         </div>
@@ -228,46 +228,38 @@
           </figure>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section video-section" id="real-videos">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Real-Robot DP + APEX Videos</h2>
-      <div class="content publication-body video-intro">
-        <p>
-          All rollouts are shown at 4x speed. The first video compares raw Diffusion Policy execution against DP + APEX, while the remaining videos show the real-robot PushCube, PickCube, and PegInsert tasks evaluated with DP + APEX.
-        </p>
-      </div>
+      <div class="real-video-block">
+        <h3 class="title is-4">DP + APEX Rollouts</h3>
+        <article class="video-feature">
+          <video controls preload="metadata" playsinline muted loop>
+            <source src="./static/videos/apex/comparison.mp4" type="video/mp4">
+          </video>
+          <div class="video-copy">
+            <h3>Raw DP vs DP + APEX</h3>
+          </div>
+        </article>
 
-      <article class="video-feature">
-        <video controls preload="metadata" playsinline muted loop>
-          <source src="./static/videos/apex/comparison.mp4" type="video/mp4">
-        </video>
-        <div class="video-copy">
-          <h3>Raw DP vs DP + APEX</h3>
+        <div class="task-video-grid">
+          <article class="video-card">
+            <video controls preload="metadata" playsinline muted loop>
+              <source src="./static/videos/apex/pushcube.mp4" type="video/mp4">
+            </video>
+            <h3>PushCube</h3>
+          </article>
+          <article class="video-card">
+            <video controls preload="metadata" playsinline muted loop>
+              <source src="./static/videos/apex/pickcube.mp4" type="video/mp4">
+            </video>
+            <h3>PickCube</h3>
+          </article>
+          <article class="video-card">
+            <video controls preload="metadata" playsinline muted loop>
+              <source src="./static/videos/apex/peginsert.mp4" type="video/mp4">
+            </video>
+            <h3>PegInsert</h3>
+          </article>
         </div>
-      </article>
-
-      <div class="task-video-grid">
-        <article class="video-card">
-          <video controls preload="metadata" playsinline muted loop>
-            <source src="./static/videos/apex/pushcube.mp4" type="video/mp4">
-          </video>
-          <h3>PushCube</h3>
-        </article>
-        <article class="video-card">
-          <video controls preload="metadata" playsinline muted loop>
-            <source src="./static/videos/apex/pickcube.mp4" type="video/mp4">
-          </video>
-          <h3>PickCube</h3>
-        </article>
-        <article class="video-card">
-          <video controls preload="metadata" playsinline muted loop>
-            <source src="./static/videos/apex/peginsert.mp4" type="video/mp4">
-          </video>
-          <h3>PegInsert</h3>
-        </article>
       </div>
     </div>
   </section>
