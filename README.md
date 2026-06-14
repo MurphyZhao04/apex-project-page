@@ -44,6 +44,6 @@ git push -u origin main
 - `index.html`: project page content
 - `static/css/index.css`: project-specific styling
 - `static/images/apex/`: rendered figures from the paper
-- `static/videos/apex/`: execution-gap and real-robot rollout videos
+- `static/videos/apex/`: overview, execution-gap, and real-robot rollout videos
 - `static/pdfs/apex-paper.pdf`: paper PDF
 - `.nojekyll`: tells GitHub Pages to serve the static files directly
