@@ -271,13 +271,6 @@ a:hover {
   font-weight: 700;
 }
 
-.video-copy p,
-.video-card p {
-  margin: 0;
-  color: #51616a;
-  line-height: 1.55;
-}
-
 .task-video-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -293,17 +286,13 @@ a:hover {
   box-shadow: 0 8px 20px rgba(35, 49, 58, 0.06);
 }
 
-.video-card h3,
-.video-card p {
+.video-card h3 {
   padding-right: 1rem;
   padding-left: 1rem;
 }
 
 .video-card h3 {
   padding-top: 0.95rem;
-}
-
-.video-card p {
   padding-bottom: 1rem;
 }
 
