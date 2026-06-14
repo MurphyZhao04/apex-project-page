@@ -224,6 +224,81 @@ a:hover {
   background: #eef4f8;
 }
 
+.video-section {
+  background: #fbfcfb;
+}
+
+.video-intro {
+  max-width: 840px;
+  margin: 0 auto 1.5rem;
+}
+
+.video-feature {
+  overflow: hidden;
+  border: 1px solid #dfe8e5;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(35, 49, 58, 0.07);
+}
+
+.video-feature video,
+.video-card video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #101820;
+  object-fit: contain;
+}
+
+.video-copy {
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.video-copy h3,
+.video-card h3 {
+  margin-bottom: 0.35rem;
+  color: #172026;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.video-copy p,
+.video-card p {
+  margin: 0;
+  color: #51616a;
+  line-height: 1.55;
+}
+
+.task-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.video-card {
+  overflow: hidden;
+  border: 1px solid #dfe8e5;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(35, 49, 58, 0.06);
+}
+
+.video-card h3,
+.video-card p {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.video-card h3 {
+  padding-top: 0.95rem;
+}
+
+.video-card p {
+  padding-bottom: 1rem;
+}
+
 #bibtex pre {
   border-radius: 8px;
   background: #172026;
@@ -275,5 +350,9 @@ a:hover {
 
   .metric-card {
     min-height: auto;
+  }
+
+  .task-video-grid {
+    grid-template-columns: 1fr;
   }
 }

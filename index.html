@@ -39,6 +39,7 @@
         <a class="navbar-item" href="#abstract">Abstract</a>
         <a class="navbar-item" href="#method">Method</a>
         <a class="navbar-item" href="#results">Results</a>
+        <a class="navbar-item" href="#videos">Videos</a>
         <a class="navbar-item" href="#bibtex">BibTeX</a>
       </div>
     </div>
@@ -247,6 +248,51 @@
                  alt="UR5 real-world deployment sequences and tracking-error comparison for Push, Pick, and Insert tasks.">
           </figure>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section video-section" id="videos">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">DP + APEX Real-Robot Videos</h2>
+      <div class="content publication-body video-intro">
+        <p>
+          All rollouts are shown at 4x speed. The first video compares raw Diffusion Policy execution against DP + APEX, while the remaining videos show the real-robot PushCube, PickCube, and PegInsert tasks evaluated with DP + APEX.
+        </p>
+      </div>
+
+      <article class="video-feature">
+        <video controls preload="metadata" playsinline muted loop>
+          <source src="./static/videos/apex/comparison.mp4" type="video/mp4">
+        </video>
+        <div class="video-copy">
+          <h3>Raw DP vs DP + APEX</h3>
+          <p>Side-by-side comparison showing how APEX corrects execution-side tracking error during deployment.</p>
+        </div>
+      </article>
+
+      <div class="task-video-grid">
+        <article class="video-card">
+          <video controls preload="metadata" playsinline muted loop>
+            <source src="./static/videos/apex/pushcube.mp4" type="video/mp4">
+          </video>
+          <h3>PushCube</h3>
+          <p>DP + APEX rollout on the real-robot pushing task.</p>
+        </article>
+        <article class="video-card">
+          <video controls preload="metadata" playsinline muted loop>
+            <source src="./static/videos/apex/pickcube.mp4" type="video/mp4">
+          </video>
+          <h3>PickCube</h3>
+          <p>DP + APEX rollout on the real-robot pick task.</p>
+        </article>
+        <article class="video-card">
+          <video controls preload="metadata" playsinline muted loop>
+            <source src="./static/videos/apex/peginsert.mp4" type="video/mp4">
+          </video>
+          <h3>PegInsert</h3>
+          <p>DP + APEX rollout on the contact-rich peg insertion task.</p>
+        </article>
       </div>
     </div>
   </section>
